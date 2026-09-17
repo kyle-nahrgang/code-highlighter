@@ -1,0 +1,124 @@
+{
+  "name": "vscode-highlighter",
+  "displayName": "Comment Highlighter",
+  "description": "Highlight sections of code between !important comments, with an optional color.",
+  "version": "0.0.1",
+  "publisher": "kylenahrgang",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "highlight",
+    "comments",
+    "region",
+    "marker",
+    "annotation"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "commentHighlighter.wrap",
+        "title": "Highlight: Wrap Selection"
+      },
+      {
+        "command": "commentHighlighter.wrapWithColor",
+        "title": "Highlight: Wrap Selection with Color..."
+      },
+      {
+        "command": "commentHighlighter.removeNearest",
+        "title": "Highlight: Remove Nearest Markers"
+      },
+      {
+        "command": "commentHighlighter.removeAll",
+        "title": "Highlight: Remove All Markers in File"
+      },
+      {
+        "command": "commentHighlighter.toggle",
+        "title": "Highlight: Toggle"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "commentHighlighter.menu",
+          "group": "1_modification@50"
+        }
+      ],
+      "commentHighlighter.menu": [
+        {
+          "command": "commentHighlighter.wrap",
+          "group": "1_wrap"
+        },
+        {
+          "command": "commentHighlighter.wrapWithColor",
+          "group": "1_wrap"
+        },
+        {
+          "command": "commentHighlighter.removeNearest",
+          "group": "2_remove"
+        },
+        {
+          "command": "commentHighlighter.removeAll",
+          "group": "2_remove"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "commentHighlighter.menu",
+        "label": "Comment Highlighter"
+      }
+    ],
+    "configuration": {
+      "title": "Comment Highlighter",
+      "properties": {
+        "commentHighlighter.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable highlighting of comment-delimited regions."
+        },
+        "commentHighlighter.token": {
+          "type": "string",
+          "default": "!important",
+          "description": "Comment marker that opens and closes a highlighted region. Opening comments may include a color, like !important:red."
+        },
+        "commentHighlighter.defaultColor": {
+          "type": "string",
+          "format": "color",
+          "default": "#e6b422",
+          "description": "Highlight color used when a marker does not specify one."
+        },
+        "commentHighlighter.includeMarkers": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include the start/end comment lines in the highlight."
+        },
+        "commentHighlighter.wholeLine": {
+          "type": "boolean",
+          "default": true,
+          "description": "Paint the highlight across the full width of each line."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "tsc -p ./ && node --test out/*.test.js",
+    "package": "npx --yes @vscode/vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.8.3"
+  }
+}

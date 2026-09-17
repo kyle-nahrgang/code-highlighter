@@ -1,0 +1,54 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to publish (leave empty to use package.json)
+        required: false
+        type: string
+
+defaults:
+  run:
+    working-directory: vscode
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: vscode/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Publish to Visual Studio Marketplace
+        env:
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          version="${INPUT_VERSION:-}"
+          if [ -z "$version" ] && [ -n "${RELEASE_VERSION:-}" ]; then
+            version="${RELEASE_VERSION#v}"
+          fi
+
+          extra=()
+          if [ -n "$version" ]; then
+            extra+=("$version" --no-git-tag-version)
+          fi
+
+          npx @vscode/vsce publish --oidc --skip-duplicate --allow-missing-repository "${extra[@]}"

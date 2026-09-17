@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+}
+
+/* !important:#22a05a */
+.hero {
+  background: gold;
+  padding: 24px;
+}
+/* !important */
