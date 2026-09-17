@@ -10,12 +10,11 @@ VS Code extension that paints regions of code between `!important` comments. The
 
 ## Publish to the Marketplace
 
-GitHub Actions packages the extension from `vscode/` and publishes it with `vsce publish --oidc` when you create a GitHub Release.
+GitHub Actions packages the extension from `vscode/` and publishes it with `vsce publish --oidc` on every commit to `main`.
+
+Each push to `main` tags a new patch version (`v0.0.1`, `v0.0.2`, …) and pushes that tag. If you already bumped `vscode/package.json` in the commit and that version is not tagged yet, the workflow uses that version instead of bumping again.
 
 One-time setup:
 
-1. Create the `kylenahrgang` publisher at [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage) if it does not already exist.
-2. In that publisher, add a **trusted publishing** policy for this GitHub repository and the workflow `.github/workflows/publish.yml`.
-3. Create a GitHub Release whose tag matches the version you want, for example `v0.0.1`.
-
-Each later release works the same way: bump `vscode/package.json` if you want the source of truth in git, tag `vX.Y.Z`, and publish the GitHub Release. The workflow also accepts a manual **Run workflow** dispatch.
+1. Confirm the `kylenahrgang` publisher exists at [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage). The Unique ID must match `publisher` in `vscode/package.json`.
+2. In that publisher, add a **trusted publishing** policy for `kyle-nahrgang/code-highlighter` and the workflow `.github/workflows/publish.yml`.

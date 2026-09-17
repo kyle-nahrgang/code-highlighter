@@ -5,6 +5,10 @@
   "version": "0.0.1",
   "publisher": "kylenahrgang",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kyle-nahrgang/code-highlighter.git"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -114,7 +118,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "tsc -p ./ && node --test out/*.test.js",
-    "package": "npx --yes @vscode/vsce package --allow-missing-repository"
+    "package": "npx --yes @vscode/vsce package"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
