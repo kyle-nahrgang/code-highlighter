@@ -21,5 +21,10 @@ One-time setup:
    - Organization: **All accessible organizations**
    - Scope: **Marketplace → Manage**
 3. Add it as a repository secret named `VSCE_PAT` at [GitHub Actions secrets](https://github.com/kyle-nahrgang/code-highlighter/settings/secrets/actions).
+4. Publish to [Open VSX](https://open-vsx.org/) so Cursor can find the extension:
+   1. Sign in at [open-vsx.org](https://open-vsx.org/) with GitHub, then sign the Eclipse Publisher Agreement on your [profile](https://open-vsx.org/user-settings/profile).
+   2. Create a token at [Access Tokens](https://open-vsx.org/user-settings/tokens).
+   3. Create the namespace once: `npx --yes ovsx create-namespace kylenahrgang -p <token>`
+   4. Add the token as a repository secret named `OVSX_PAT`.
 
-Marketplace `--oidc` trusted publishing is not live yet (`/_apis/gallery/token` returns 404), so the workflow authenticates with `VSCE_PAT`.
+Marketplace `--oidc` trusted publishing is not live yet (`/_apis/gallery/token` returns 404), so the VS Marketplace workflow authenticates with `VSCE_PAT`.

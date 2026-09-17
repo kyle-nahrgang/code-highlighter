@@ -81,3 +81,16 @@ jobs:
             exit 1
           fi
           npx --yes @vscode/vsce publish --skip-duplicate
+
+      - name: Publish to Open VSX
+        working-directory: vscode
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          set -euo pipefail
+          if [ -z "${OVSX_PAT:-}" ]; then
+            echo "Add a repository secret named OVSX_PAT to publish to Open VSX (Cursor)."
+            echo "Create the token at https://open-vsx.org/user-settings/tokens"
+            exit 1
+          fi
+          npx --yes ovsx publish
