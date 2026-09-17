@@ -1,4 +1,4 @@
-# Comment Highlighter
+# !important Highlighter
 
 VS Code extension that paints regions of code between `!important` comments.
 
@@ -23,7 +23,7 @@ The closing comment is a bare `!important`. Put a color only on the opening comm
 1. Open the repository root in VS Code or Cursor.
 2. Press F5 (`Run Extension`) to launch a new window with the extension loaded.
 3. Open `vscode/examples/demo.ts` — the marked blocks should already be highlighted.
-4. Select some code, right-click, and choose **Comment Highlighter → Wrap Selection**.
+4. Select some code, right-click, and choose **!important Highlighter → Wrap Selection**.
 
 ## Commands
 

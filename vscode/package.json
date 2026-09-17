@@ -1,6 +1,6 @@
 {
   "name": "vscode-highlighter",
-  "displayName": "Comment Highlighter",
+  "displayName": "!important Highlighter",
   "description": "Highlight sections of code between !important comments, with an optional color.",
   "version": "0.0.1",
   "publisher": "kylenahrgang",
@@ -78,11 +78,11 @@
     "submenus": [
       {
         "id": "commentHighlighter.menu",
-        "label": "Comment Highlighter"
+        "label": "!important Highlighter"
       }
     ],
     "configuration": {
-      "title": "Comment Highlighter",
+      "title": "!important Highlighter",
       "properties": {
         "commentHighlighter.enabled": {
           "type": "boolean",
